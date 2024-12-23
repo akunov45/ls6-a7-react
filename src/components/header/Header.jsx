@@ -4,7 +4,13 @@ import './Header.css'
 import { GoSearch } from "react-icons/go";
 import { PiShoppingCartSimple } from "react-icons/pi";
 
+import { useContext } from "react"
+import { APPCONTEXT } from "../../context/AppContext"
+
 const Header = () => {
+    const { cartData } = useContext(APPCONTEXT);
+    console.log(cartData);
+
     return (
         <header >
             <div className='logo'>
@@ -21,8 +27,10 @@ const Header = () => {
             <div className='cart-btn'>
                 <a href="">
                     <span>100 $</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                    <span ><PiShoppingCartSimple />
-                    5 </span>
+                    <span >
+                        <PiShoppingCartSimple />
+                        {cartData.length > 0 ? cartData.length : null}
+                    </span>
                 </a>
             </div>
         </header>

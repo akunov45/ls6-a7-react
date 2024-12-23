@@ -1,9 +1,19 @@
+import { useContext } from 'react'
 import FilterButton from '../../components/filter-button/FilterButton'
 import './Home.css'
 import { GoPlus } from 'react-icons/go'
+import { APPCONTEXT } from '../../context/AppContext'
 
 const Home = (props) => {
-  // data
+  const {setCartData} = useContext(APPCONTEXT)
+
+  const addToCart = (product) => {
+    // ... spread and rest operator
+    setCartData( (oldPizza) => {
+      return [...oldPizza, product]
+    })
+  }
+
   return (
     <div className=''>
       <FilterButton />
@@ -26,7 +36,9 @@ const Home = (props) => {
               </div>
               <div className="pizza-card-footer">
                 <h4> от ${pizza.price}  </h4>
-                <button> <GoPlus /> Добавить </button>
+                <button onClick={() => {
+                  addToCart(pizza)
+                }}> <GoPlus /> Добавить </button>
               </div>
             </div>
           )
